@@ -27,7 +27,7 @@ update msg model =
 
 -- view
 
-view : Model -> Html Msg
+view : Model -> Html Msgca
 view model =
   div []
     [ button [ onClick Decrement ] [ text "-" ]
@@ -35,4 +35,3 @@ view model =
     , button [ onClick Increment ] [ text "+" ]
     ,  div [] [ button [ onClick Reset ] [ text "reset" ] ]
     ]
- 
