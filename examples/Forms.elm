@@ -40,7 +40,9 @@ view model =
   div []
   [ input [ type_ "text", placeholder "Enter name", onInput Name ] []
   , input [ type_ "password", placeholder "Enter password", onInput Password ] []
+  , passwordValidation model
   , input [ type_ "password", placeholder "Enter password again", onInput PasswordAgain ] []
+  , passwordValidation model
   , viewValidation model
   ]
 
@@ -54,3 +56,14 @@ viewValidation model =
         ("red", "Passwords do not match!")
   in
     div [ style [("color", color)] ] [ text message ]
+
+passwordValidation : Model -> Html Msg
+passwordValidation model =
+  let
+    (color, message) =
+      if model.password.length >= 8 then
+        ("green", "Password ok")
+      else
+        ("red", "Password must have more than 8 characters")
+  in
+    div [ style [("color", color)]] [ text message]
