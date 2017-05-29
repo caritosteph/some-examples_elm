@@ -1,6 +1,6 @@
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onInput)
+import Html.Events exposing (onInput, onClick)
 
 main =
   Html.beginnerProgram { model = model, view = view, update = update }
@@ -23,6 +23,7 @@ type Msg
   = Name String
   | Password String
   | PasswordAgain String
+  | Submit
 
 update : Msg -> Model -> Model
 update msg model =
@@ -33,6 +34,8 @@ update msg model =
       { model | password = password }
     PasswordAgain passwordAgain ->
       { model | passwordAgain = passwordAgain }
+    Submit ->
+      model
 
 -- View
 view : Model -> Html Msg
@@ -44,6 +47,8 @@ view model =
   , input [ type_ "password", placeholder "Enter password again", onInput PasswordAgain ] []
   , passwordValidation model
   , viewValidation model
+  , button [ onClick Submit ] [ text "Submit" ]
+  , div [] [ text model.name]
   ]
 
 viewValidation : Model -> Html msg
